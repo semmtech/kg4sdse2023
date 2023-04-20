@@ -1,0 +1,20 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sml:  <https://w3id.org/sml/def#> .
+@prefix prmt: <http://example.org/prmt/def#> .
+
+<req1> a sml:Requirement ; 
+   rdf:value "The ramps will have a slope of maximum 12\%, except: a) those belonging to access routes, whose slope will be maximum 10\% when their length is less than 3 m, 8\% when the length is less than 6 m, and 6\% in all other cases."@en ; 
+   skos:prefLabel "Maximum slope of ramps"@en .
+
+<ramp> a owl:Class ;
+   rdfs:subClassOf sml:PhysicalObject ; 
+   skos:prefLabel "Access Ramp"@en ; 
+   sml:hasRequirement <req1> .
+
+<ver1> a prmt:Verification ; 
+   prmt:hasAsSubject <ramp> ; 
+   prmt:isVerificationOf <req1> ; 
+   prmt:hasVerificationMethod "Calculation"@en .
