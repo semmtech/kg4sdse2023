@@ -1,0 +1,55 @@
+@base           <http://example.org/> .
+@prefix ex:     <http://example.org/> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix sml:    <https://w3id.org/sml/def#> .
+@prefix numWeb: <http://numerateweb.org/vocab/math#> .
+@prefix prmt:   <http://example.org/prmt/def#> .
+
+<req1-part1> a sml:Requirement ;
+  <ComplyCalculation> [ a numWeb:Application ;
+    <HumanReadable> "@<ex:height> / @<ex:length> < 0.10" ;
+    numWeb:arguments [ 
+      rdf:first [
+        numWeb:arguments [ a rdf:List ;
+          rdf:first [ a numWeb:Application ;
+            numWeb:arguments [ a rdf:List ;
+              rdf:first "http://example.org/height" ;
+              rdf:rest rdf:nil ]  ;
+            numWeb:operator "http://www.openmath.org/cd/rdf#value"];
+            rdf:rest [ rdf:first [ a numWeb:Application ;
+              numWeb:arguments [ a rdf:List ;
+                rdf:first "http://example.org/length" ;
+                rdf:rest rdf:nil ] ;
+              numWeb:operator "http://www.openmath.org/cd/rdf#value"];
+              rdf:rest rdf:nil ] 
+        ] ;
+        numWeb:operator "http://www.openmath.org/cd/arith1#divide"];
+      rdf:rest [ rdf:first 0.1 ; rdf:rest rdf:nil ]
+    ] ;
+    numWeb:operator "http://www.openmath.org/cd/relation1#lt"
+  ] ;
+  <InclusionCalculation> [ a numWeb:Application ; 
+    <HumanReadable> "@<ex:length> < 3" ; 
+    numWeb:arguments [ a rdf:List ; 
+      rdf:first [ a numWeb:Application ;
+        numWeb:arguments [ a rdf:List ;
+          rdf:first "http://example.org/height" ;
+          rdf:rest rdf:nil ]  ;
+        numWeb:operator "http://www.openmath.org/cd/rdf#value"]; 
+      rdf:rest [ rdf:first 0.1 ; rdf:rest rdf:nil ] ] ;
+    numWeb:operator "http://www.openmath.org/cd/relation1#lt" 
+  ]  .
+
+<ramp-short> a owl:Class ;
+  rdfs:subClassOf <ramp> ; 
+  skos:prefLabel "Short Access Ramp"@en ; 
+  sml:hasRequirement <req1-part1> ; 
+  skos:note "Length is less than 3 meters"@en . 
+
+<ver1-part1> a prmt:Verification ; 
+  prmt:hasAsSubject <ramp-short> ; 
+  prmt:isVerificationOf <req1-part1> ; 
+  prmt:hasVerificationMethod "Automated calculation"@en .

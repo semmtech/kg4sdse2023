@@ -1,0 +1,43 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sml:  <https://w3id.org/sml/def#> .
+@prefix prmt: <http://example.org/prmt/def#> .
+
+<req1>  a sml:Requirement ;
+   skos:prefLabel "Maximum slope of ramps"@en ;
+   rdf:value "The ramps will have a slope of maximum 12\%, except: a) those belonging to access routes, whose slope will be maximum 10\% when their length is less than 3 m, 8\% when the length is less than 6 m, and 6\% in all other cases."@en ;
+   prmt:isCoveredBy ( <req1-part1> <req1-part2> ) .
+
+<req1-part1> a sml:Requirement ; 
+   rdf:value "Ramps belonging to access routes with a length less than 3 meters, will have a maximum slope of 10\%."@en ;
+   prmt:isDerivedFrom <req1> ; 
+   skos:prefLabel "Maximum slope of Access ramps shorter than 3 meter"@en  .
+
+<req1-part2> a sml:Requirement ; 
+   rdf:value "Ramps belonging to access routes with a length less than 6 meters and length more than 3 meters, will have a maximum slope of 8\%."@en ;
+   prmt:isDerivedFrom <req1> ;
+   skos:prefLabel "Maximum slope of Access ramps between 3 and 6 meters long"@en  .
+
+<ramp-short> a owl:Class ;
+   rdfs:subClassOf <ramp> ; 
+   skos:prefLabel "Short Access Ramp"@en ; 
+   sml:hasRequirement <req1-part1> ; 
+   skos:note "Length is less than 3 meters"@en . 
+
+<ramp-medium> a owl:Class ;
+   rdfs:subClassOf <ramp> ; 
+   skos:prefLabel "Medium length Access Ramp"@en ; 
+   sml:hasRequirement <req1-part2> ;
+   skos:note "Length is between 3 and 6 meters"@en .
+
+<ver1-part1> a prmt:Verification ; 
+   prmt:hasAsSubject <ramp-short> ; 
+   prmt:isVerificationOf <req1-part1> ; 
+   prmt:hasVerificationMethod "Calculation"@en .
+
+<ver1-part2> a prmt:Verification ; 
+   prmt:hasAsSubject <ramp-medium> ; 
+   prmt:isVerificationOf <req1-part2> ; 
+   prmt:hasVerificationMethod "Calculation"@en .
