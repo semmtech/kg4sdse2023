@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use these examples, please cite the paper to which they belong."
+authors:
+- family-names: "Bazuin"
+  given-names: "Bram"
+  orcid: "https://orcid.org/0009-0000-2323-668X"
+- family-names: "Stolk"
+  given-names: "Sander"
+  orcid: "https://orcid.org/0000-0003-2254-6613"
+- family-names: "Van Gruijthuijsen"
+  given-names: "Coen"
+title: "KG4SDSE 2023, paper materials"
+url: "https://github.com/semmtech/kg4sdse2023"
+preferred-citation:
+  type: conference-paper
+  authors:
+    - family-names: "Bazuin"
+      given-names: "Bram"
+      orcid: "https://orcid.org/0009-0000-2323-668X"
+    - family-names: "Stolk"
+      given-names: "Sander"
+      orcid: "https://orcid.org/0000-0003-2254-6613"
+    - family-names: "Stevens"
+      given-names: "Marco"
+      orcid: "https://orcid.org/0009-0000-4500-0475"
+  title: "Towards Recommendations for Knowledge-graph-based Requirements Management in Construction: A Report on the EU DigiChecks Project"
+  year: 2023
+  collection-title: "Advanced Information Systems Engineering Workshops: CAiSE 2023 International Workshops, Zaragoza, Spain, June 12–16, 2023, Proceedings"
+  collection-doi: 10.1007/978-3-031-34985-0
+  conference:
+    name: CAiSE
+    city: Zaragoza
+    country: ES
+    date-start: 2023-06-12
+    date-end: 2023-06-16
+  start: 80 # First page number
+  end: 91 # Last page number
+  url: "https://doi.org/10.1007/978-3-031-34985-0"
+  doi: 10.1007/978-3-031-34985-0
